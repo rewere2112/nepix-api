@@ -15,20 +15,13 @@ auth.USERS_DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'u
 
 app = Flask(__name__)
 
-# CORS configuration for production
+# CORS configuration - Allow all origins for launcher compatibility
 CORS(app, resources={
     r"/api/*": {
-        "origins": [
-            "https://nepix.lat",
-            "https://nepix.qzz.io",
-            "https://nepix.eu.org",                 # Tu dominio personalizado
-            "https://rewere2112.github.io",         # Tu GitHub Pages
-            "http://localhost:8000",                # Tu servidor local de frontend
-            "http://localhost:5000",
-            "http://127.0.0.1:8000",
-            "null"                                  # Para archivos locales (file://)
-        ],
-        "supports_credentials": True
+        "origins": "*",  # Allow all origins (desktop launcher)
+        "supports_credentials": True,
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
     }
 })
 
